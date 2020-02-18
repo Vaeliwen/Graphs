@@ -90,13 +90,21 @@ class Graph:
 ​
         This should be done using recursion.
         """
+        visited = set()
         # Check if the node is visited
+        if starting_vertex in visited:
+            pass
         # Hint: https://docs.python-guide.org/writing/gotchas/
         # If not...
+        else:
             # Mark it as visited
+            visited.add(starting_vertex)
             # Print
+            print(starting_vertex + " visited!")
             # Call DFT_Recursive on each child
-        pass  # TODO
+            for vertex in self.get_neighbors(starting_vertex):
+                self.dft_recursive(vertex)
+            pass
 
     def bfs(self, starting_vertex, destination_vertex):
         """
@@ -105,19 +113,35 @@ class Graph:
         breath-first order.
         """
         # Create an empty queue
+        paths = Queue()
         # Add A PATH TO the starting vertex_id to the queue
+        paths.enqueue([starting_vertex])
         # Create an empty set to store visited nodes
+        visited = set()
         # While the queue is not empty...
+        while paths.size() > 0:
             # Dequeue, the first PATH
+            path = paths.dequeue()
             # GRAB THE LAST VERTEX FROM THE PATH
+            last = path[-1]
             # CHECK IF IT'S THE TARGET
+            if last == destination_vertex:
                 # IF SO, RETURN THE PATH
+                return path
             # Check if it's been visited
+            else:
+
             # If it has not been visited...
+                if last not in visited:
                 # Mark it as visited
+                    visited.add(last)
                 # Then add A PATH TO all neighbors to the back of the queue
                     # (Make a copy of the path before adding)
-        pass  # TODO
+                    for i in self.get_neighbors(last):
+                        new_path = path.copy()
+                        new_path.append(i)
+                        paths.enqueue(new_path)
+        return None
 
     def dfs(self, starting_vertex, destination_vertex):
         """
