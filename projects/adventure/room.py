@@ -13,6 +13,12 @@ class Room:
         self.y = y
     def __str__(self):
         return f"\n-------------------\n\n{self.name}\n\n   {self.description}\n\n{self.get_exits_string()}\n"
+    def neighbors(self):
+        exits = self.get_exits()
+        neighbors = []
+        for e in exits:
+            neighbors.append(self.get_room_in_direction(e))
+        return neighbors
     def print_room_description(self, player):
         print(str(self))
     def get_exits(self):
